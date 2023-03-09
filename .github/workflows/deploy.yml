@@ -1,0 +1,27 @@
+name: Deploy
+on:
+  push:
+    branches: [master]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CHROME_APP_ID: ibbnflebibmaomolippckjbahgaophfh
+      FF_APP_ID: "video-speed-controller@mikeyaworski.com"
+    steps:
+    - uses: actions/checkout@v2
+    - run: git archive -o package.zip HEAD:src
+    - uses: trmcnvn/chrome-addon@v2
+      with:
+        extension: ${{ env.CHROME_APP_ID }}
+        zip: package.zip
+        client-id: ${{ secrets.CHROME_CLIENT_ID }}
+        client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+        refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+    - uses: trmcnvn/firefox-addon@v1
+      with:
+        uuid: "${{ env.FF_APP_ID }}"
+        xpi: package.zip
+        manifest: src/manifest.json
+        api-key: ${{ secrets.FF_JWT_ISSUER }}
+        api-secret: ${{ secrets.FF_JWT_SECRET }}
