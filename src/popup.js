@@ -16,17 +16,23 @@ function changeVideoSpeeds(speed) {
   });
 }
 
-document.getElementById('form').addEventListener('submit', async e => {
+async function injectSpeedScript(speed) {
+  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+  const tabId = tabs[0]?.id;
+  chrome.scripting.executeScript({
+    target: { tabId },
+    func: changeVideoSpeeds,
+    args: [speed],
+  });
+}
+
+document.getElementById('form').addEventListener('submit', e => {
   e.preventDefault();
   const data = new FormData(e.target);
   const { speed } = Object.fromEntries(data);
-  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-  const tabId = tabs[0]?.id;
-  if (tabId && speed) {
-    chrome.scripting.executeScript({
-      target: { tabId },
-      func: changeVideoSpeeds,
-      args: [speed],
-    });
-  }
-})
+  if (speed) injectSpeedScript(speed);
+});
+
+document.getElementById('reset').addEventListener('click', () => {
+  injectSpeedScript(1);
+});
