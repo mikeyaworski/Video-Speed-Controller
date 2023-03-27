@@ -20,7 +20,7 @@ async function injectSpeedScript(speed) {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
   const tabId = tabs[0]?.id;
   chrome.scripting.executeScript({
-    target: { tabId },
+    target: { tabId, allFrames: true },
     func: changeVideoSpeeds,
     args: [speed],
   });
