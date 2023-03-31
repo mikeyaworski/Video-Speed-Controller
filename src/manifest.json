@@ -19,6 +19,39 @@
   "action": {
     "default_popup": "popup.html"
   },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+V",
+        "mac": "MacCtrl+V"
+        },
+      "description" : "Start the extension"
+    },
+    "toggle-speed": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "mac": "MacCtrl+S"
+      },
+      "description": "Use alternate video speed"
+    },
+    "increase-speed": {
+      "suggested_key": {
+        "default": "Alt+Up",
+        "mac": "MacCtrl+Up"
+      },
+      "description": "Increase video speed"
+    },
+    "decrease-speed": {
+      "suggested_key": {
+        "default": "Alt+Down",
+        "mac": "MacCtrl+Down"
+      },
+      "description": "Decrease video speed"
+    }
+  },
   "host_permissions": [
     "<all_urls>"
   ],

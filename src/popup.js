@@ -1,5 +1,5 @@
-chrome.storage.local.get(['speed'], ({ speed }) => {
-  document.getElementById('speed').value = speed || 2.5;
+getSpeedPreference().then(speed => {
+  document.getElementById('speed').value = speed;
 });
 
 document.getElementById('speed').addEventListener('change', e => {
@@ -9,30 +9,13 @@ document.getElementById('speed').addEventListener('change', e => {
   }
 });
 
-function changeVideoSpeeds(speed) {
-  console.log(`Changed video speeds to ${speed}x.`);
-  document.querySelectorAll('video').forEach(vid => {
-    vid.playbackRate = Number(speed);
-  });
-}
-
-async function injectSpeedScript(speed) {
-  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-  const tabId = tabs[0]?.id;
-  chrome.scripting.executeScript({
-    target: { tabId, allFrames: true },
-    func: changeVideoSpeeds,
-    args: [speed],
-  });
-}
-
 document.getElementById('form').addEventListener('submit', e => {
   e.preventDefault();
   const data = new FormData(e.target);
   const { speed } = Object.fromEntries(data);
-  if (speed) injectSpeedScript(speed);
+  if (speed) injectSpeedScript(speed, false);
 });
 
 document.getElementById('reset').addEventListener('click', () => {
-  injectSpeedScript(1);
+  injectSpeedScript(1, false);
 });
