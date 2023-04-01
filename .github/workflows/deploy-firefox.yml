@@ -12,11 +12,11 @@ jobs:
     - uses: montudor/action-zip@v1
     - run: rm src/manifest.json
     - run: mv src/manifest.firefox.json src/manifest.json
-    - run: zip -r package.zip ./src
+    - run: cd src && zip -r package.zip .
     - uses: trmcnvn/firefox-addon@v1
       with:
         uuid: "${{ env.FF_APP_ID }}"
-        xpi: package.zip
+        xpi: src/package.zip
         manifest: src/manifest.json
         api-key: ${{ secrets.FF_JWT_ISSUER }}
         api-secret: ${{ secrets.FF_JWT_SECRET }}
