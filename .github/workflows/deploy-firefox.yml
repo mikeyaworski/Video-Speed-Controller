@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Firefox
 on:
   push:
     branches: [master]
@@ -6,18 +6,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      CHROME_APP_ID: ibbnflebibmaomolippckjbahgaophfh
       FF_APP_ID: "video-speed-controller@mikeyaworski.com"
     steps:
     - uses: actions/checkout@v2
-    - run: git archive -o package.zip HEAD:src
-    - uses: trmcnvn/chrome-addon@v2
-      with:
-        extension: ${{ env.CHROME_APP_ID }}
-        zip: package.zip
-        client-id: ${{ secrets.CHROME_CLIENT_ID }}
-        client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-        refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+    - uses: montudor/action-zip@v1
+    - run: rm src/manifest.json
+    - run: mv src/manifest.firefox.json src/manifest.json
+    - run: zip -r package.zip ./src
     - uses: trmcnvn/firefox-addon@v1
       with:
         uuid: "${{ env.FF_APP_ID }}"
