@@ -1,4 +1,7 @@
-importScripts('utils.js');
+// Not supported in Firefox
+if (typeof importScripts === 'function') {
+  importScripts('utils.js');
+}
 
 chrome.commands.onCommand.addListener(command => {
   switch (command) {

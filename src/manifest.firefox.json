@@ -3,6 +3,11 @@
   "description": "Change speed of all videos on page.",
   "version": "1.0.4",
   "manifest_version": 3,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "video-speed-controller@mikeyaworski.com"
+    }
+  },
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -15,22 +20,22 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["utils.js", "background.js"]
   },
   "commands": {
     "_execute_action": {
       "suggested_key": {
-        "default": "Alt+V",
-        "mac": "MacCtrl+V"
+        "default": "Alt+Q",
+        "mac": "MacCtrl+Shift+Q"
         },
       "description" : "Start the extension"
     },
     "toggle-speed": {
       "suggested_key": {
-        "default": "Alt+S",
-        "mac": "MacCtrl+S"
+        "default": "Alt+Shift+Q",
+        "mac": "MacCtrl+Shift+Q"
       },
-      "description": "Use alternate video speed"
+      "description": "Use Alternate Video Speed"
     },
     "increase-speed": {
       "suggested_key": {
