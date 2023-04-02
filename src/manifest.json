@@ -21,28 +21,28 @@
     "_execute_action": {
       "suggested_key": {
         "default": "Alt+V",
-        "mac": "MacCtrl+V"
+        "mac": "Alt+V"
         },
       "description" : "Start the extension"
     },
     "toggle-speed": {
       "suggested_key": {
         "default": "Alt+S",
-        "mac": "MacCtrl+S"
+        "mac": "Alt+S"
       },
       "description": "Use alternate video speed"
     },
     "increase-speed": {
       "suggested_key": {
         "default": "Alt+Up",
-        "mac": "MacCtrl+Up"
+        "mac": "Alt+Up"
       },
       "description": "Increase video speed"
     },
     "decrease-speed": {
       "suggested_key": {
         "default": "Alt+Down",
-        "mac": "MacCtrl+Down"
+        "mac": "Alt+Down"
       },
       "description": "Decrease video speed"
     }
