@@ -1,7 +1,7 @@
 {
   "name": "Video Speed Controller",
   "description": "Change speed of all videos on page.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "manifest_version": 3,
   "icons": {
     "16": "icons/icon16.png",
@@ -22,7 +22,7 @@
       "suggested_key": {
         "default": "Alt+V",
         "mac": "Alt+V"
-        },
+      },
       "description" : "Start the extension"
     },
     "toggle-speed": {
